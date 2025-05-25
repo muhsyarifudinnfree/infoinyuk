@@ -1,0 +1,286 @@
+@import 'tailwindcss';
+
+@plugin "daisyui" {
+  themes:
+    retro --default,
+    night --preferluxury;
+}
+
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* View Transition API */
+::view-transition-old(root) {
+  animation: fadeOut 0.3s ease-in-out;
+}
+
+::view-transition-new(root) {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Header and footer styling */
+.navbar {
+  @apply bg-primary shadow-lg text-primary-content;
+}
+
+/* Ensure Leaflet map does not overlap header */
+.leaflet-container {
+  @apply relative z-10;
+}
+
+/* Ensure map container has correct positioning */
+.map-container {
+  @apply relative z-10;
+}
+
+/* Map inner container */
+#map-inner {
+  @apply w-full h-full;
+}
+
+/* Map fallback message */
+#map-fallback {
+  @apply bg-base-200 rounded-lg p-4 text-center;
+}
+
+.leaflet-control-layers-expanded {
+  @apply p-1;
+}
+
+.leaflet-control-layers-list {
+  @apply space-y-1;
+}
+
+/* Specific styling for base layers */
+.leaflet-control-layers-base {
+  @apply flex flex-col space-y-1;
+}
+
+.leaflet-control-layers-base label {
+  @apply flex items-center cursor-pointer;
+}
+
+.leaflet-control-layers-base input[type='radio'] {
+  @apply mr-1 h-3 w-3;
+}
+
+.leaflet-control-layers-base span {
+  @apply text-[0.75rem] font-normal break-words;
+}
+
+/* Responsive layer control */
+@media (max-width: 640px) {
+  .leaflet-control-layers {
+    @apply max-w-[160px] p-1;
+  }
+  .leaflet-control-layers-base span {
+    @apply text-[0.65rem];
+  }
+  .leaflet-control-layers-base input[type='radio'] {
+    @apply h-2.5 w-2.5 mr-1;
+  }
+}
+
+.footer {
+  @apply bg-secondary text-secondary-content p-6;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Larger and more comfortable input styles */
+input,
+textarea,
+select {
+  @apply text-lg p-4 w-full;
+}
+
+/* Responsive input styles for larger screens */
+@media (min-width: 640px) {
+  input,
+  textarea,
+  select {
+    @apply text-base p-3;
+  }
+}
+
+/* Responsive text sizes for hero content and navbar on smaller screens */
+@media (max-width: 639px) {
+  .hero h1 {
+    @apply text-4xl;
+  }
+  .hero p {
+    @apply text-lg;
+  }
+  .hero .btn-lg {
+    @apply text-base px-4 py-2;
+  }
+  .navbar-center span {
+    @apply text-2xl;
+  }
+}
+
+/* Form card border */
+.card.bg-base-100 {
+  border: 2px solid var(--color-base-300);
+}
+
+/* Ensure dropdown is flush left and responsive */
+.dropdown-content {
+  transform: none !important;
+  left: 0 !important;
+  width: 100%;
+  max-width: 16rem;
+}
+
+@media (min-width: 640px) {
+  .dropdown-content {
+    width: 16rem;
+  }
+}
+
+/* Sticky footer styles */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  margin-top: auto;
+}
+
+/* Center footer content */
+footer aside {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Leaflet map */
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
+
+/* Custom animations */
+.animate-pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Social media icons */
+.footer a:hover {
+  @apply scale-110 transition-transform;
+}
+
+/* Skip to content button */
+#skip-content {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+#skip-content:focus {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Story detail location text */
+#detail-story p {
+  @apply break-words;
+}
+
+#camera-select {
+  min-height: 3rem; /* Tinggi minimum untuk elemen select */
+  line-height: 2; /* Tinggi baris untuk menempatkan teks di tengah */
+  width: 100%; /* Pastikan lebar penuh */
+  padding: 0.5rem; /* Padding dalam elemen select */
+}
+
+/* Responsive dropdown menu */
+@media (max-width: 768px) {
+  .dropdown-content {
+    width: auto !important;
+    min-width: max-content;
+    max-width: 90vw;
+    left: 0.5rem !important;
+    right: auto !important;
+    white-space: nowrap;
+  }
+
+  .dropdown-content .menu-item {
+    padding: 0.5rem 1rem;
+  }
+
+  .dropdown-content a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.dropdown-content .menu-item:hover {
+  background-color: var(--color-primary-focus);
+  color: var(--color-primary-content);
+}
+
+.dropdown-content .menu-item:hover a {
+  color: inherit;
+}

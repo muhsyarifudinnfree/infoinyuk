@@ -1,0 +1,2 @@
+Firebase Hosting
+APP_URL="https://infoinyuk-app.web.app/"
